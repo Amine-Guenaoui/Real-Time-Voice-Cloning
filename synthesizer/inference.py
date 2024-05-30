@@ -133,7 +133,7 @@ class Synthesizer:
         Loads and preprocesses an audio file under the same conditions the audio files were used to
         train the synthesizer.
         """
-        wav = librosa.load(str(fpath), hparams.sample_rate)[0]
+        wav = librosa.load(path=str(fpath), sr =hparams.sample_rate)[0]
         if hparams.rescale:
             wav = wav / np.abs(wav).max() * hparams.rescaling_max
         return wav
@@ -149,7 +149,7 @@ class Synthesizer:
         else:
             wav = fpath_or_wav
 
-        mel_spectrogram = audio.melspectrogram(wav, hparams).astype(np.float32)
+        mel_spectrogram = audio.melspectrogram(wav, hparams).astype(np.float64)
         return mel_spectrogram
 
     @staticmethod
